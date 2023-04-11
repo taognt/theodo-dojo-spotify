@@ -1,7 +1,14 @@
 import logo from './assets/logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 const App = () => {
+  const [trackIndex, setTrackIndex] = useState(0);
+
+  const goToNextTrack = () => {
+    setTrackIndex(trackIndex + 1);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -10,7 +17,10 @@ const App = () => {
       </header>
       <div className="App-images">
         <p>Il va falloir modifier le code pour faire un vrai blind test !</p>
-        <audio src={trackUrls[1]} controls />
+        <audio src={trackUrls[trackIndex]} autoPlay controls />
+        <button type="button" onClick={goToNextTrack} className="button_click">
+          Nouveau son
+        </button>
       </div>
       <div className="App-buttons"></div>
     </div>

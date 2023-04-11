@@ -39,3 +39,23 @@
     transform: rotate(360deg);
   }
 }
+
+.button_click {
+  align-self: center;
+  color: rgb(255, 255, 255);
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  background-color: #479f66;
+  padding: 10px;
+  border-radius: 999px; /* use a large value for a rounded shape */
+  cursor: pointer;
+  font-weight: lighter;
+  transition: background-color 0.2s ease-in-out;
+  max-width: 600px;
+}
+
+.button_click:hover {
+  background-color: #8ecaa3;
+}

@@ -1,23 +1,28 @@
 import logo from './assets/logo.svg';
 import './App.css';
+import { fetchTracks } from './lib/fetchTracks.ts';
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 const App = () => {
   const [trackIndex, setTrackIndex] = useState(0);
 
   const goToNextTrack = () => {
-    setTrackIndex(trackIndex + 1);
+    setTrackIndex((trackIndex + 1) % trackUrls.length);
   };
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">Blindtest Spotify</h1>
+        <h1 className="App-title">Blind test Spotify</h1>
       </header>
       <div className="App-images">
-        <p>Il va falloir modifier le code pour faire un vrai blind test !</p>
-        <audio src={trackUrls[trackIndex]} autoPlay controls />
+        <p>Place à la musique</p>
+
+        <div>
+          <audio src={trackUrls[trackIndex]} controls />
+        </div>
         <button type="button" onClick={goToNextTrack} className="button_click">
           Nouveau son
         </button>
@@ -26,6 +31,11 @@ const App = () => {
     </div>
   );
 };
+
+const { data: tracks } = useQuery({
+  queryKey: ['tracks'],
+  queryFn: fetchTracks,
+});
 
 const trackUrls = [
   'https://p.scdn.co/mp3-preview/742294f35af9390e799dd96c633788410a332e52',

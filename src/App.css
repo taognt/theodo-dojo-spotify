@@ -59,3 +59,13 @@
 .button_click:hover {
   background-color: #8ecaa3;
 }
+
+.audio-player {
+  width: 15rem;
+  height: 15rem;
+}
+
+.audio-icon {
+  width: 90%;
+  height: 90%;
+}

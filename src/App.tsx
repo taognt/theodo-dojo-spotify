@@ -3,7 +3,6 @@ import './App.css';
 import { fetchTracks } from './lib/fetchTracks';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { SavedTrack } from 'spotify-types';
 
 const App = () => {
   const [trackIndex, setTrackIndex] = useState(0);
@@ -12,13 +11,22 @@ const App = () => {
     setTrackIndex((trackIndex + 1) % trackUrls.length);
   };
 
-  const { data: tracks } = useQuery({
+  /*setIsLoading(true);*/
+
+  const {
+    data: tracks,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ['tracks'],
     queryFn: fetchTracks,
   });
 
-  if (tracks === undefined) {
-    return <div></div>;
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isError) {
+    return <div>Error !!</div>;
   }
 
   return (
@@ -26,7 +34,7 @@ const App = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="App-title">Blind test Spotify</h1>
-        <h3> Première musique : {tracks[0]?.track.name}</h3>
+        <p>{tracks[0]?.track.name}</p>
       </header>
       <div className="App-images">
         <p>Place à la musique</p>
